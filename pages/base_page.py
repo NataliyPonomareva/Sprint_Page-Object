@@ -34,6 +34,10 @@ class BasePage:
         WebDriverWait(self.driver, 50).until(expected_conditions.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
+    @allure.step('Заполнение поля')
+    def send_keys(self, locator, val=None) -> WebElement:
+        self.wait_and_find_element(locator).send_keys(val)
+        
     @allure.step('Скролл страницы до нужного элемента')
     def scroll_and_find_element(self, locator) -> WebElement: # Скролл страницы до элемента и клик по нему
         element = self.driver.find_element(*locator)
