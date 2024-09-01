@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
+
 class OrderPageLocator:
 
 # Форма "Для кого самокат"

@@ -1,9 +1,6 @@
 import allure
 import pytest
 from data import Urls
-from locators.base_page_locators import BasePageLocators
-from locators.order_page_locator import OrderPageLocator
-from pages.base_page import BasePage
 from pages.order_page import OrderPage
 
 
@@ -19,15 +16,9 @@ class TestCreateOrder:
     )
     def test_create_order(self, driver, name, surname, address, metro, telephone, when, period, colour, comment):
         create_order = OrderPage(driver)
-        create_order.open_page(Urls.DRIVER)
-        create_order.wait_and_find_element(BasePageLocators.ORDER_BUTTON_TOP)
-        create_order.click_by_element(BasePageLocators.ORDER_BUTTON_TOP)
-        create_order.wait_and_find_element(OrderPageLocator.HEADER_FOR_WHO)
-        create_order.input_form_for_who_scooter(name, surname, address, metro, telephone)
-
-        create_order.wait_and_find_element(OrderPageLocator.HEADER_ABOUT_RENT)
-        create_order.fill_rent_form(when, period, colour, comment)
-        create_order.order_confirmation()
-        create_order.wait_and_find_element(OrderPageLocator.BUTTON_ORDER_STATUS)
-
-        assert create_order.is_displayed(OrderPageLocator.BUTTON_ORDER_STATUS)
+        create_order.open_page(Urls.DRIVER) # переход на хост
+        create_order.open_order_form()  # открытие формы бронирования
+        create_order.input_form_for_who_scooter(name, surname, address, metro, telephone) # заполнение формы "Для кого самокат
+        create_order.fill_rent_form(when, period, colour, comment) # заполнение формы "Про аренду"
+        button = create_order.order_confirmation()
+        assert button.is_displayed(), "Кнопка 'Статус заказа' не отображается"
