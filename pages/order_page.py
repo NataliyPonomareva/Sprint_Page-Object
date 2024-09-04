@@ -1,16 +1,18 @@
 import allure
 
-from locators.base_page_locators import BasePageLocators
 from locators.order_page_locator import OrderPageLocator
 from pages.base_page import BasePage
 
 
 
 class OrderPage(BasePage):
+    @allure.step('Загрузка драйвера')
+    def __init__(self, driver):
+        super().__init__(driver)  # Вызов конструктора родительского класса
 
     @allure.step('Открытие формы бронирование через кнопку "Заказать" внизу страницы')
     def opening_order_form(self, heaber):
-        self.scroll_and_find_element(BasePageLocators.ORDER_BUTTON_DOWN)
+        self.scroll_and_find_element(OrderPageLocator.ORDER_BUTTON_DOWN)
         self.wait_and_find_element(OrderPageLocator.HEADER_FOR_WHO)
 
     @allure.step('Выбор станции метро')
@@ -61,11 +63,11 @@ class OrderPage(BasePage):
 
     @allure.step('Открытие формы бронирования через кнопку "Заказать", расположенную вверху страницы')
     def open_order_form(self):
-        self.wait_and_find_element(BasePageLocators.ORDER_BUTTON_TOP).click()
+        self.wait_and_find_element(OrderPageLocator.ORDER_BUTTON_TOP).click()
         self.wait_and_find_element(OrderPageLocator.HEADER_FOR_WHO)
 
     @allure.step('Открытие формы бронирования через кнопку "Заказать", расположенную внизу страницы')
     def open_order_form_button_below(self):
-        self.scroll_and_find_element(BasePageLocators.ORDER_BUTTON_DOWN)
+        self.scroll_and_find_element(OrderPageLocator.ORDER_BUTTON_DOWN)
         header = self.wait_and_find_element(OrderPageLocator.HEADER_FOR_WHO)
         return header

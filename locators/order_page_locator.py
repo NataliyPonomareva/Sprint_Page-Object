@@ -3,6 +3,9 @@ from selenium.webdriver.common.by import By
 
 
 class OrderPageLocator:
+    ORDER_BUTTON_TOP = (By.CLASS_NAME, "Button_Button__ra12g")  # кнопка "Войти" вверху страницы
+    ORDER_BUTTON_DOWN = (By.XPATH, '//div[contains(@class, "Home_FinishButton")]/button[text()="Заказать"]')  # кнопка "Войти" внизу страницы
+
 
 # Форма "Для кого самокат"
     HEADER_FOR_WHO = (By.CLASS_NAME, "Order_Header__BZXOb") # заголовок "Для кого самокат"

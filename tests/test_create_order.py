@@ -1,6 +1,6 @@
 import allure
 import pytest
-from data import Urls
+from data import Urls, Order
 from pages.order_page import OrderPage
 
 
@@ -8,12 +8,7 @@ from pages.order_page import OrderPage
 class TestCreateOrder:
     @allure.title('Тест открытия Окна подтверждения заказа после заполнения формы "Про аренду"')
     @pytest.mark.parametrize(
-        "name, surname, address, metro, telephone, when, period, colour, comment",
-        [
-            ("Ирина", "Смирнова", "Высотная", "Кузьминки", "+79856457822", "01.10.2024", "сутки", "black", "Позвоните при доставке"),
-            ("Петр", "Красилов", "ул. Усачева, 21, 2", "Спортивная", "+87985645782", "20.10.2024", "трое суток", "grey", "позвонить за час"),
-        ]
-    )
+        "name, surname, address, metro, telephone, when, period, colour, comment",Order.order_data)
     def test_create_order(self, driver, name, surname, address, metro, telephone, when, period, colour, comment):
         create_order = OrderPage(driver)
         create_order.open_page(Urls.DRIVER) # переход на хост
