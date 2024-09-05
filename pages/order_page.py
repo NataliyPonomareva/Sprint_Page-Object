@@ -36,7 +36,7 @@ class OrderPage(BasePage):
     def complete_period(self, period): # Заполняем поле "Срок аренды"
         self.wait_and_find_element(OrderPageLocator.PERIOD_INPUT).click()
         period_option_locator = OrderPageLocator.period_value(period)
-        self.wait_and_find_element(period_option_locator).click()
+        self.click_by_element(period_option_locator)
 
     @allure.step('Выбор цвета самоката')
     def complete_colour(self, colour): # Выбираем "Цвет самоката"

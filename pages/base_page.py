@@ -48,6 +48,25 @@ class BasePage:
         button_top = self.wait_and_find_element(button)
         button_top.click()
 
+    @allure.step('Открытие ответа')
+    def get_text(self, locator):
+        element  = self.wait_and_find_element(locator)
+        return element .text
+
     @allure.step('Получение url страницы')
     def get_current_url(self):
         return self.driver.current_url
+
+    @allure.step('Получение дескрипторов окон')
+    def get_current_window_handle(self):
+        return self.driver.current_window_handle
+
+    @allure.step('Переключение на новое окно')
+    def switch_to_new_window(self, original_window):
+        WebDriverWait(self.driver, 10).until(expected_conditions.new_window_is_opened)
+        new_window = [window for window in self.driver.window_handles if window != original_window][0]
+        self.driver.switch_to.window(new_window)
+
+    @allure.step('Ожидание загрузки URL')
+    def wait_for_url(self, url):
+        WebDriverWait(self.driver, 10).until(expected_conditions.url_to_be(url))
